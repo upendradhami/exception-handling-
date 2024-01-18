@@ -1,0 +1,69 @@
+#include<iostream>
+#include<cmath>
+#include<string.h>
+
+using namespace std;
+
+class number
+{
+    double num;
+public:
+    class smg
+    {
+        
+    public:
+    double value;  // you must put the values in public section to access it from main program 
+        char description[900];
+        smg()
+        {
+            value = 0;
+            description[900] = '\0';
+        }
+        smg(double v, char* des)
+        {
+            value = v;
+            strcpy(description, des);
+        }
+    };
+    void getnum();
+    double sqroot();
+};
+
+void number::getnum()
+{
+    cout << "Enter the number: \n ";
+    cin >> num;
+}
+
+double number::sqroot()
+{
+    if (num < 0)
+    {
+        throw smg(num, "Negative value");
+    }
+    else
+    {
+        return sqrt(num);
+    }
+}
+
+int main()
+{
+    number n1;
+    double res;
+    n1.getnum();
+    try
+    {
+        cout << "Try to find sqroot " << endl;
+        res = n1.sqroot();
+        cout << "The sqroot is: " << res << endl;
+        cout << "The exception is not found " << endl;
+    }
+    catch (number::smg n)
+    {
+        cout << "Exception is found " << endl;
+        cout << "Exception value is: " << n.value << endl;
+        cout << "Description value is: " << n.description << endl;
+    }
+    return 0;
+}
